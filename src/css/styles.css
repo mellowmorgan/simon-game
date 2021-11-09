@@ -5,10 +5,25 @@
   margin:1rem;
 
 }
-
-.light{
+#gameover{
+  display:none;
+}
+.red{
   width:10rem;
   height:10rem;
-  background-color:grey;
+  background-color:red;
+  margin:1rem;
+}
+.blue{
+  width:10rem;
+  height:10rem;
+  background-color:blue;
+  margin:1rem;
+}
+
+.yellow{
+  width:10rem;
+  height:10rem;
+  background-color:rgb(255, 234, 0);
   margin:1rem;
 }
