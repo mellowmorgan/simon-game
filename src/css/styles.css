@@ -1,27 +1,38 @@
-.game-blinker-box{
+#game-blinker-box{
   width:10rem;
   height:10rem;
   background-color:grey;
   margin:1rem;
-
 }
+.blink-red{
+  background-color: red !important;
+  
+}
+.blink-yellow{
+  background-color:rgb(255, 234, 0) !important;
+}
+.blink-blue{
+  background-color:blue !important;
+}
+
+
 #gameover{
   display:none;
 }
-.red{
+#red{
   width:10rem;
   height:10rem;
   background-color:red;
   margin:1rem;
 }
-.blue{
+#blue{
   width:10rem;
   height:10rem;
   background-color:blue;
   margin:1rem;
 }
 
-.yellow{
+#yellow{
   width:10rem;
   height:10rem;
   background-color:rgb(255, 234, 0);
