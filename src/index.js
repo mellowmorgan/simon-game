@@ -6,30 +6,60 @@ import './css/styles.css';
 
 let game;
 let clicked="none";
+
+
+
 function startRound(){
   let newPattern = game.getPattern();
+  function colorize(i){
+    $("#game-blinker-box").css("background-color", newPattern[i]);
+  }
+  function greyify(){
+    $("#game-blinker-box").css("background-color", "grey");
+  }
+  
+  $("#round-status").hide();
+  let clickPassed=false;
+  
+  
   for(let i=0;i<newPattern.length;i++){
     setTimeout(function() {
-      $("#game-blinker-box").css("background-color", newPattern[i]);
-  }, 800);
+     colorize(i);
+  }, 1000);
+  setTimeout(function() {
+    greyify();
+  }, 2000);
 
-  } setTimeout(function() {
-    $("#game-blinker-box").css("background-color", "grey");
-  }, 1700);
-
+  } 
    for(let i=0;i<newPattern.length;i++){
    setTimeout(function() {
       if(clicked===newPattern[i]){
-        alert("correct");
+        //alert("correct");
+        clickPassed=true;
+      }else{
+        clickPassed=false;
+        $("#gameover").show();
+        $("#start").text("Try again");
         
-      }else{alert("wrong")}
-   }, 3000);clicked="none";
+      }
+   }, 3000);
+   clicked="none";
   }
+  setTimeout(function() {
+  if(clickPassed){
+    $("#round-number").html(game.round-1);
+    $("#round-status").show();
+    setTimeout(function() {
+        startRound();
+      }, 2000);
+  }}, 3000);
   
 }
 
 function clickListeners(){
   $("#start").on("click", function(){
+    $("#gameover").hide();
+    $("#round-status").hide();
     game = new Game();
     startRound();
   });

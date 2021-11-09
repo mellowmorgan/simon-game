@@ -14,7 +14,7 @@
 .blink-blue{
   background-color:blue !important;
 }
-
+#round-status{display:none;}
 
 #gameover{
   display:none;
@@ -35,6 +35,6 @@
 #yellow{
   width:10rem;
   height:10rem;
-  background-color:rgb(255, 234, 0);
+  background-color:yellow;
   margin:1rem;
 }
