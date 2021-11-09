@@ -1,0 +1,14 @@
+.game-blinker-box{
+  width:10rem;
+  height:10rem;
+  background-color:grey;
+  margin:1rem;
+
+}
+
+.light{
+  width:10rem;
+  height:10rem;
+  background-color:grey;
+  margin:1rem;
+}
