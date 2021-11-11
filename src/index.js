@@ -7,31 +7,38 @@ import './css/styles.css';
 let game;
 let clicked="none";
 
-
+let round= 1;
 
 function startRound(){
   let newPattern = game.getPattern();
-  function colorize(i){
-    $("#game-blinker-box").css("background-color", newPattern[i]);
+  function addGrayToArray(array){
+    let newArray = [];
+    array.forEach(function(color){
+      newArray.push(color);
+      newArray.push("grey");
+    }
+    );
+    return newArray;
   }
-  function greyify(){
-    $("#game-blinker-box").css("background-color", "grey");
-  }
-  
+
   $("#round-status").hide();
   let clickPassed=false;
   
-  
-  for(let i=0;i<newPattern.length;i++){
-    setTimeout(function() {
-     colorize(i);
-  }, 1000);
-  setTimeout(function() {
-    greyify();
-  }, 2000);
+  let newPatternWithGray = addGrayToArray(newPattern);
+  //alert(newPatternWithGray)
 
-  } 
+  let index = 0;
+function flashSimon() {
+  $("#game-blinker-box").css("background-color", newPatternWithGray[index]);
+	if (index < newPatternWithGray.length) {
+		setTimeout(flashSimon, 500);
+	}
+  index += 1;
+}
+setTimeout(flashSimon, 500);
+
    for(let i=0;i<newPattern.length;i++){
+    
    setTimeout(function() {
       if(clicked===newPattern[i]){
         //alert("correct");
@@ -42,14 +49,16 @@ function startRound(){
         $("#start").text("Try again");
         
       }
-   }, 3000);
+   }, (3000));
    clicked="none";
   }
+  
   setTimeout(function() {
   if(clickPassed){
     $("#round-number").html(game.round-1);
     $("#round-status").show();
     setTimeout(function() {
+        round++;
         startRound();
       }, 2000);
   }}, 3000);

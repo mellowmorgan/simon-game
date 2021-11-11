@@ -1,7 +1,7 @@
 const path = require('path');
-
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); 
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -16,7 +16,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(), 
     new HtmlWebpackPlugin({
-      title: 'Shape Tracker',
+      title: 'journal-entry-project',
       template: './src/index.html',
       inject: 'body'
     })
@@ -35,8 +35,6 @@ module.exports = {
         exclude: /node_modules/,
         loader: "eslint-loader"
       }
-
-      
     ]
   }
 };
