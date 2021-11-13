@@ -6,10 +6,11 @@ import './css/styles.css';
 
 let game;
 let clicked="none";
+let clickedList;
 
-let round= 1;
 
 function startRound(){
+  clickedList =[];
   let newPattern = game.getPattern();
   function addGrayToArray(array){
     let newArray = [];
@@ -27,41 +28,43 @@ function startRound(){
   let newPatternWithGray = addGrayToArray(newPattern);
   //alert(newPatternWithGray)
 
-  let index = 0;
+  let index = -1;
 function flashSimon() {
+  index += 1;
   $("#game-blinker-box").css("background-color", newPatternWithGray[index]);
 	if (index < newPatternWithGray.length) {
 		setTimeout(flashSimon, 500);
 	}
-  index += 1;
 }
 setTimeout(flashSimon, 500);
 
-   for(let i=0;i<newPattern.length;i++){
-    
-   setTimeout(function() {
-      if(clicked===newPattern[i]){
-        //alert("correct");
-        clickPassed=true;
-      }else{
-        clickPassed=false;
-        $("#gameover").show();
-        $("#start").text("Try again");
-        
-      }
-   }, (3000));
-   clicked="none";
-  }
+setTimeout(function() {
   
+  game.currentPattern.forEach(function(colorTrue){
+    clickedList.forEach(function(clickedColor){
+      if(colorTrue===clickedColor){
+        clickPassed=true;
+      }
+      else{clickPassed=false;}
+    });
+  });
   setTimeout(function() {
-  if(clickPassed){
-    $("#round-number").html(game.round-1);
-    $("#round-status").show();
-    setTimeout(function() {
-        round++;
-        startRound();
-      }, 2000);
-  }}, 3000);
+    if(clickPassed){
+      $("#round-number").html(game.round-1);
+      $("#round-status").show();
+      setTimeout(function() {
+          startRound();
+        }, 2000);
+    }
+    else{
+          $("#gameover").show();
+          $("#start").text("Try again");
+    }
+  }, 50);
+    
+}, 2000*game.round);
+
+
   
 }
 
@@ -73,13 +76,13 @@ function clickListeners(){
     startRound();
   });
   $("#red").on("click", function(){
-    clicked=this.id;
+    clickedList.push(this.id);
   });
   $("#yellow").on("click", function(){
-    clicked=this.id;
+    clickedList.push(this.id);
   });
   $("#blue").on("click", function(){
-    clicked=this.id;
+    clickedList.push(this.id);
   });
 
 }
